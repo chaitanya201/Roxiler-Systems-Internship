@@ -48,13 +48,15 @@ const getAllUserData = async (req, res) => {
       );
       if (todoList.statusText === "OK") {
         let output = [user.data];
+        let todo = []
         console.log("first out", output);
         for (let index = 0; index < todoList.data.length; index++) {
-          if (todoList.data[index].userId === user.id) {
-            output.push(todoList.data[index]);
+          if (todoList.data[index].userId === user.data.id) {
+            todo.push(todoList.data[index]);
           }
         }
-        console.log("output is ", output);
+        user.data.todo = [...todo]
+        console.log("todo is ", user.data.todo);
         res.send(output);
       } else {
         console.log("failed to get todo list");

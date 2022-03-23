@@ -47,9 +47,7 @@ const getAllUserData = async (req, res) => {
         "https://jsonplaceholder.typicode.com/todos"
       );
       if (todoList.statusText === "OK") {
-        let output = [user.data];
         let todo = []
-        console.log("first out", output);
         for (let index = 0; index < todoList.data.length; index++) {
           if (todoList.data[index].userId === user.data.id) {
             todo.push(todoList.data[index]);
@@ -57,7 +55,7 @@ const getAllUserData = async (req, res) => {
         }
         user.data.todo = [...todo]
         console.log("todo is ", user.data.todo);
-        res.send(output);
+        res.send(user.data);
       } else {
         console.log("failed to get todo list");
         res.send({ status: "failed", message: "failed to get todo list" });
